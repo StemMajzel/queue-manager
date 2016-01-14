@@ -1,0 +1,9 @@
+{
+  "name": "queue-manager",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "~4.13.3",
+    "mathjs": "2.6.0",
+    "bcrypt-nodejs": "0.0.3"
+  }
+}
