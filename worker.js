@@ -11,15 +11,17 @@ function worker() {
 
   var app = express();
   app.get('/', function(request, response) {
-    //var a = getRandomInt(1, 100);
-    //var b = getRandomInt(1, 100);
+    var a = getRandomInt(1, 100);
+    var b = getRandomInt(1, 100);
 
-    //response.write(String(a) + ', ' + String(b));
+    response.write('PID ' + String(process.pid) + "\n");
 
-    //response.write('returnFibonacci ' + String(functions.returnFibonacci(a)) + ' PID: ' + String(process.pid));
-    //response.write('evaluateMath ' + String(functions.evaluateMath("4 + 5 - 4 * 6 + 7")) + ' PID: ' + String(process.pid));
-    //response.write('reverseText ' + String(functions.reverseText("Perica reže raci rep")) + ' PID: ' + String(process.pid));
-    //response.write('bcryptText ' + String(functions.bcryptText("Traalalal")) + ' PID: ' + String(process.pid));
+    response.write(String(a) + ', ' + String(b) + "\n");
+
+    response.write('returnFibonacci ' + String(functions.returnFibonacci(a)) + "\n");
+    response.write('evaluateMath ' + String(functions.evaluateMath("4 + 5 - 4 * 6 + 7")) + "\n");
+    response.write('reverseText ' + String(functions.reverseText("Perica reže raci rep")) + "\n");
+    response.write('bcryptText ' + String(functions.bcryptText("Traalalal")) + "\n");
 
     //response.json({"foo" : "bar"});
     response.end();
