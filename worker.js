@@ -1,33 +1,24 @@
+var functions = require('./functions.js');
+
 /**
-* Worker - server
+* Worker - process
 */
 function worker() {
-  var express = require('express');
-  var functions = require('./functions.js');
+  process.on('message', function(message) {
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+    // add process id to message (just for info)
+    message.pid = process.pid;
 
-  var app = express();
-  app.get('/', function(request, response) {
-    var a = getRandomInt(1, 100);
-    var b = getRandomInt(1, 100);
+    // check if function exists, and run it
+    if (functions.service[message.function]) {
+      var fn = functions.service[message.function];
+      message.result = fn(message.param);
+    } else {
+      message.result = 'Function not found';
+    }
 
-    response.write('PID ' + String(process.pid) + "\n");
-
-    response.write(String(a) + ', ' + String(b) + "\n");
-
-    response.write('returnFibonacci ' + String(functions.returnFibonacci(a)) + "\n");
-    response.write('evaluateMath ' + String(functions.evaluateMath("4 + 5 - 4 * 6 + 7")) + "\n");
-    response.write('reverseText ' + String(functions.reverseText("Perica reže raci rep")) + "\n");
-    response.write('bcryptText ' + String(functions.bcryptText("Traalalal")) + "\n");
-
-    //response.json({"foo" : "bar"});
-    response.end();
+    process.send(message);
   });
-
-  app.listen(8000);
 }
 
 // export functions

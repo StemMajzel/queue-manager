@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      function getParam() {
+        return $('input#param').val();
+      }
+
+      $("#returnFibonacci").click(function(){
+        $("#returnFibonacciresult").html('...');
+        $.ajax({
+          url : "/",
+          type : "get",
+          data : {
+            function : 'returnFibonacci',
+            param : getParam()
+          },
+          success: function(result){
+            $("#returnFibonacciresult").html(result.result);
+          }
+        });
+      });
+
+      $("#evaluateMath").click(function(){
+        $("#evaluateMathresult").html('...');
+        $.ajax({
+          url : "/",
+          type : "get",
+          data : {
+            function : 'evaluateMath',
+            param : getParam()
+          },
+          success: function(result){
+            $("#evaluateMathresult").html(result.result);
+          }
+        });
+      });
+
+      $("#reverseText").click(function(){
+        $("#reverseTextresult").html('...');
+        $.ajax({
+          url : "/",
+          type : "get",
+          data : {
+            function : 'reverseText',
+            param : getParam()
+          },
+          success: function(result){
+            $("#reverseTextresult").html(result.result);
+          }
+        });
+      });
+
+      $("#bcryptText").click(function(){
+        $("#bcryptTextresult").html('...');
+        $.ajax({
+          url : "/",
+          type : "get",
+          data : {
+            function : 'bcryptText',
+            param : getParam()
+          },
+          success: function(result){
+            $("#bcryptTextresult").html(result.result);
+          }
+        });
+      });
+
+    });
+    </script>
+    <style>
+      button {
+        float : left;
+        width : 200px;
+        height : 25px;
+      }
+      div.return {
+        float : left;
+        background-color : #ccc;
+        height : 25px;
+        padding-left : 2px;
+        padding-right : 2px;
+      }
+      div.clear {
+        clear : both;
+        height : 5px;
+      }
+    </style>
+  </head>
+  <body>
+    Value :
+    <input name="param" id="param" />
+    <div class="clear"></div>
+
+    <button id="returnFibonacci">returnFibonacci</button>
+    <div class="return" id="returnFibonacciresult"></div>
+    <div class="clear"></div>
+
+    <button id="evaluateMath">evaluateMath</button>
+    <div class="return" id="evaluateMathresult"></div>
+    <div class="clear"></div>
+
+    <button id="reverseText">reverseText</button>
+    <div class="return" id="reverseTextresult"></div>
+    <div class="clear"></div>
+
+    <button id="bcryptText">bcryptText</button>
+    <div class="return" id="bcryptTextresult"></div>
+    <div class="clear"></div>
+
+  </body>
+</html>

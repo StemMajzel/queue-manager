@@ -4,6 +4,10 @@
 * @return integer result of Fibonacci function
 */
 function returnFibonacci(n) {
+  n = checkInt(n);
+  if (n === false)
+    return 'Integer required';
+
   var f = 0, f2 = 0, f1 = 1;
   var nabs = Math.abs(n);
 
@@ -26,7 +30,14 @@ function returnFibonacci(n) {
 */
 function evaluateMath(problem) {
   var math = require('mathjs');
-  return math.eval(problem);
+  var result;
+  try {
+    result = math.eval(problem);
+  }
+  catch(err) {
+    result = err.message;
+  }
+  return result;
 }
 
 /**
@@ -52,10 +63,41 @@ function bcryptText(str) {
   return bcrypt.hashSync(str);
 }
 
+/**
+* Generates random integer on interval
+* @param int min minumum
+* @param int max maximum
+* @return int random integer in interval
+*/
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+/**
+* Check if integer
+* @param mixed input param that you need to check
+* @return int integer value if int, false otherwise
+*/
+function checkInt(input) {
+  var x;
+  if (isNaN(input)) {
+    return false;
+  }
+  x = parseFloat(input);
+  x_t = (x | 0);
+  if (x_t === x)
+    return x_t;
+
+  return false;
+}
+
 // export functions
 module.exports = {
-  returnFibonacci : returnFibonacci,
-  evaluateMath : evaluateMath,
-  reverseText : reverseText,
-  bcryptText : bcryptText
+  service : {
+    returnFibonacci : returnFibonacci,
+    evaluateMath : evaluateMath,
+    reverseText : reverseText,
+    bcryptText : bcryptText
+  },
+  getRandomInt : getRandomInt
 };
