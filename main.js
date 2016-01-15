@@ -126,7 +126,7 @@ if (cluster.isMaster) {
     }
 
     if (request.url === '/test.html') {
-      fs.readFile('test.html', function (err, data) {
+      fs.readFile(require('path').resolve(__dirname, 'test.html'), function (err, data) {
         response.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
         response.write(data);
         response.end();
